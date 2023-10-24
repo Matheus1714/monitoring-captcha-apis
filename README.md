@@ -97,4 +97,4 @@ API_KEY_TWO_CAPCHA = os.environ.get('API_KEY_TWO_CAPCHA', '')
 
 ## License
 
-This project is licensed under the [License Name] - see the LICENSE file for details.
+This project is licensed under the [LICENSE](LICENSE) - see the LICENSE file for details.
