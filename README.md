@@ -15,8 +15,8 @@ It is very common that sometimes it is possible to forget how much captcha is sp
 - [X] Integration with Anti-Captcha
 - [X] Integration with Two-Captcha
 - [X] Integration with Cap-Solver 
-- [] Email notification with founds for each captcha
-- [] Email notification when a captcha API is close to running out of funds
+- [ ] Email notification with founds for each captcha
+- [ ] Email notification when a captcha API is close to running out of funds
 
 ## DEMO
 
@@ -57,6 +57,7 @@ python-dotenv
 Flask
 requests
 requests-mock
+apscheduler
 ```
 
 ### Usage
