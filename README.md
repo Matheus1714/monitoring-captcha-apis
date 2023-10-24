@@ -6,6 +6,21 @@ This project aims to be an API that monitors the funds of several captcha APIs.
 
 ## Table of Contents
 
+- [Introduction](#introduction)
+- [Features](#features)
+- [DEMO](#demo)
+- [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Configuration](#configuration)
+    - [Installation (Development)](#installation-development)
+    - [Usage](#usage)
+        - [[Development]](#development)
+        - [[Docker]](#docker)
+        - [[Deploy]](#deploy)
+- [License](#license)
+
+
+
 ## Introduction
 
 It is very common that sometimes it is possible to forget how much captcha is spent per month, but this API aims to facilitate this problem.
