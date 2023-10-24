@@ -6,11 +6,7 @@ from src.routes.home import home
 app = Flask(__name__)
 
 app.register_blueprint(home)
-# app.register_blueprint(captcha)
-
-@app.route('/teste')
-def home():
-    return 'Hello, World!'
+app.register_blueprint(captcha)
 
 
 # if __name__ == '__main__':
