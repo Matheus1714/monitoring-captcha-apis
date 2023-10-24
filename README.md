@@ -28,7 +28,17 @@ The working API is available at: [DEMO](https://hastings-monitoring-captcha-apis
 
 - python3
 
-### Installation
+### Configuration
+
+Before starting the project, put your API keys in the `env.local` file. There is an example `.env.example` that can be followed as a reference to complete the configuration.
+
+```shell
+API_KEY_ANTI_CAPTCHA='759bfb3978f7e8b014140a4aeeb15cfc'
+API_KEY_CAP_SOLVER='CAP-057C2D02277BC413A062110D6025763F'
+API_KEY_TWO_CAPCHA='9f631adafecfa21c252c9ba07e710c4a'
+```
+
+### Installation (Development)
 
 First create a virtual environment using `virtualenv`:
 
@@ -77,11 +87,33 @@ API_KEY_CAP_SOLVER = config.get('API_KEY_CAP_SOLVER', '')
 API_KEY_TWO_CAPCHA = config.get('API_KEY_TWO_CAPCHA', '')
 ```
 
-```py
-# index.py
-if __name__ == '__main__':
-    app.run(debug=True)
+Now run the command to start:
+
+```shell
+python -m flask run --host=0.0.0.0
 ```
+
+Access `http://localhost:5000`.
+
+Now Enjoy!!
+
+#### [Docker]
+
+To run the application with Docker, use the commands:/
+
+1. Create a image
+
+```shell
+docker build -t hastings-monitoring-captcha-api .
+```
+
+2. Run Image
+
+```shell
+docker run -d -p 5000:5000 hastings-monitoring-captcha-api
+```
+
+Access `http://localhost:5000`.
 
 #### [Deploy]
 
@@ -94,6 +126,14 @@ import os
 API_KEY_ANTI_CAPTCHA = os.environ.get('API_KEY_ANTI_CAPTCHA', '')
 API_KEY_CAP_SOLVER = os.environ.get('API_KEY_CAP_SOLVER', '')
 API_KEY_TWO_CAPCHA = os.environ.get('API_KEY_TWO_CAPCHA', '')
+```
+
+On the deployment platform you choose, remember to configure the environment variables.
+
+```shell
+API_KEY_ANTI_CAPTCHA=...
+API_KEY_CAP_SOLVER=...
+API_KEY_TWO_CAPCHA=...
 ```
 
 ## License
