@@ -1,6 +1,7 @@
 import http
 
 from flask import Blueprint, jsonify
+from typing import Tuple
 
 from src.utils.model.BaseCaptchaResponseModel import BaseCaptchaResponseModel
 from src.utils.model.CaptchaAntiCaptchaAPI import CaptchaAntiCaptchaAPI
@@ -11,54 +12,47 @@ from src.utils.model.ResponseDataDTOModel import ResponseDataDTOModel
 
 captcha = Blueprint('captcha', __name__)
 
-@captcha.route('/balance', methods=['GET'])
-def get_all_balance():
-    apis = [CaptchaAntiCaptchaAPI(), CaptchaTwoCaptchaAPI(), CaptchaCapSolverAPI()]
-    data = []
+def get_balance_response(api: BaseCaptchaResponseModel, message: str)->Tuple[dict, http.HTTPStatus]:
+    balance = api.get_balance()
+    response_dto = ResponseCaptchaDTOModel(balance=balance, message=message)
 
-    for api in apis:
-        api:BaseCaptchaResponseModel
-        balance = api.get_balance()
-
-        response_dto = ResponseCaptchaDTOModel(balance = balance, message='')
-        data.append(response_dto.get_response())
-
-    response_dto = ResponseDataDTOModel(data = data)
-
-    response = jsonify(response_dto.get_response())
+    response_dict = response_dto.get_response()
     status = http.HTTPStatus.OK
 
-    return response, status
+    return response_dict, status
+
+@captcha.route('/balance', methods=['GET'])
+def get_all_balance():
+    apis = [
+        (CaptchaAntiCaptchaAPI(), 'Anticaptcha balance'),
+        (CaptchaTwoCaptchaAPI(), 'TwoCaptcha balance'),
+        (CaptchaCapSolverAPI(), 'CapSolver balance')
+    ]
+    data = []
+
+    status = http.HTTPStatus.OK
+    for api, message in apis:
+        response_dict, status = get_balance_response(api, message)
+        data.append(response_dict)
+
+    response_dto = ResponseDataDTOModel(data=data)
+
+    return jsonify(response_dto.get_response()), status
 
 @captcha.route('/balance/anti-captcha', methods=['GET'])
 def balance_anti_captcha():
     api = CaptchaAntiCaptchaAPI()
-    balance = api.get_balance()
-
-    response_dto = ResponseCaptchaDTOModel(balance = balance, message='Anticaptcha balance')
-    response = jsonify(response_dto.get_response())
-    status = http.HTTPStatus.OK
-
-    return response, status
+    response_dict, status = get_balance_response(api, 'Anticaptcha balance')
+    return jsonify(response_dict), status
 
 @captcha.route('/balance/two-captcha', methods=['GET'])
 def balance_two_captcha():
     api = CaptchaTwoCaptchaAPI()
-    balance = api.get_balance()
-
-    response_dto = ResponseCaptchaDTOModel(balance = balance, message='TwoCaptcha balance')
-    response = jsonify(response_dto.get_response())
-    status = http.HTTPStatus.OK
-
-    return response, status
+    response_dict, status = get_balance_response(api, 'TwoCaptcha balance')
+    return jsonify(response_dict), status
 
 @captcha.route('/balance/cap-solver', methods=['GET'])
 def balance_cap_solver():
     api = CaptchaCapSolverAPI()
-    balance = api.get_balance()
-
-    response_dto = ResponseCaptchaDTOModel(balance = balance, message='CapSolver balance')
-    response = jsonify(response_dto.get_response())
-    status = http.HTTPStatus.OK
-
-    return response, status
+    response_dict, status = get_balance_response(api, 'CapSolver balance')
+    return jsonify(response_dict), status
