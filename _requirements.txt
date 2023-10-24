@@ -1,6 +1,0 @@
-pytest
-requests
-python-dotenv
-Flask
-requests
-requests-mock
