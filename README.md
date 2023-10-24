@@ -33,9 +33,9 @@ The working API is available at: [DEMO](https://hastings-monitoring-captcha-apis
 Before starting the project, put your API keys in the `env.local` file. There is an example `.env.example` that can be followed as a reference to complete the configuration.
 
 ```shell
-API_KEY_ANTI_CAPTCHA='759bfb3978f7e8b014140a4aeeb15cfc'
-API_KEY_CAP_SOLVER='CAP-057C2D02277BC413A062110D6025763F'
-API_KEY_TWO_CAPCHA='9f631adafecfa21c252c9ba07e710c4a'
+API_KEY_ANTI_CAPTCHA=...
+API_KEY_CAP_SOLVER=...
+API_KEY_TWO_CAPCHA=...
 ```
 
 ### Installation (Development)
