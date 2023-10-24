@@ -1,32 +1,34 @@
+import pytest
+import requests_mock
+from requests.exceptions import RequestException
+
 from src.utils.model.ResponseModel import ResponseModel
 
-import pytest
-import requests
-from requests.exceptions import RequestException
-import requests_mock
 
-@pytest.fixture
-def response_model_instance():
-    return ResponseModel()
+class TestResponseModel:
 
-def test_send_request_successful(response_model_instance):
-    with requests_mock.Mocker() as mocker:
-        url = "https://example.com/api"
-        params = {"key": "value"}
+    @pytest.fixture
+    def response_model(self):
+        return ResponseModel()
 
-        mocker.post(url, json={"result": "success"}, status_code=200)
+    def test_send_request_successful(self, response_model):
+        with requests_mock.Mocker() as mocker:
+            url = "https://example.com/api"
+            params = {"key": "value"}
 
-        response = response_model_instance.send_request(url, params)
+            mocker.post(url, json={"result": "success"}, status_code=200)
 
-        assert response == {"result": "success"}
+            response = response_model.send_request(url, params)
 
-def test_send_request_request_exception(response_model_instance):
-    with requests_mock.Mocker() as mocker:
-        url = "https://example.com/api"
-        params = {"key": "value"}
+            assert response == {"result": "success"}
 
-        mocker.post(url, exc=RequestException("Mocked request exception"))
+    def test_send_request_request_exception(self, response_model):
+        with requests_mock.Mocker() as mocker:
+            url = "https://example.com/api"
+            params = {"key": "value"}
 
-        response = response_model_instance.send_request(url, params)
+            mocker.post(url, exc=RequestException("Mocked request exception"))
 
-        assert response == {}
+            response = response_model.send_request(url, params)
+
+            assert response == {}
