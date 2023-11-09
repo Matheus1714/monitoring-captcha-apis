@@ -1,0 +1,23 @@
+# @name get-welcome
+GET http://192.168.0.249:5000
+
+###
+
+# @name get-all-balances
+GET http://192.168.0.249:5000/balance
+
+###
+
+# @name get-balance-anti-captcha
+GET http://192.168.0.249:5000/balance/anti-captcha
+
+###
+
+# @name get-balance-two-captcha
+GET http://192.168.0.249:5000/balance/two-captcha
+
+###
+
+# @name get-balance-cap-solver
+GET http://192.168.0.249:5000/balance/cap-solver
+
