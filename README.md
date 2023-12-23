@@ -1,4 +1,4 @@
-# Hastings Monitoring Captcha API's
+# Monitoring Captcha API's
 
 ![Banner Project](.github/banner.png)
 
@@ -119,13 +119,13 @@ To run the application with Docker, use the commands:/
 1. Create a image
 
 ```shell
-docker build -t hastings-monitoring-captcha-api .
+docker build -t monitoring-captcha-api .
 ```
 
 2. Run Image
 
 ```shell
-docker run -d -p 5000:5000 hastings-monitoring-captcha-api
+docker run -d -p 5000:5000 monitoring-captcha-api
 ```
 
 Access `http://localhost:5000`.
